@@ -23,4 +23,4 @@ To use the files in this folder, follow these steps:
 
 2. Import the required classes and functions from the respective files.
 
-3. Use the imported classes and functions to solve specific quantum computing problems or run experiments. Some examples are depicted in `QAOA-demo-2.ipynb` and `VQE-demo-2.ipynb`.
+3. Use the imported classes and functions to solve specific quantum computing problems or run experiments. Some examples are depicted in `QAOA-demo-2.ipynb` and `VQE-demo-2.ipynb`. Additionally, the `VQA-experiments.py` has some examples that can be run. 

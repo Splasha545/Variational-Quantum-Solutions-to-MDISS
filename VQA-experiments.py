@@ -375,7 +375,7 @@ def difficulty_scaling(reps=20, VQE=False, QAOA=False, quadratic=False, low=0, h
         print(f"Current qubit number: {num}")
         problem_avg_probabilities = []
         problem_probability_spread = []
-        for problem in test_pkg.problems[num][:2]:
+        for problem in test_pkg.problems[num]:
             n = problem['n']
             elistG = problem['elistG']
             m = problem['m']
@@ -441,7 +441,7 @@ def complexity_estimation(n, elistG, m, elistH, correct_bitstrings, quadratic=Fa
             print("Current problem size: ", num)
             print("\n\n")
             problem_probabilities = []
-            for problem in test_pkg.problems[num]:
+            for problem in test_pkg.problems[num][:2]:
                 n = problem['n']
                 elistG = problem['elistG']
                 m = problem['m']
@@ -500,32 +500,32 @@ def main():
     # print(run_experiment(n, elistG, m, elistH, QAOA=True, VQE=False, correct_bitstrings=correct_bitstrings, quadratic=False, runs=10, depth=6))
     
     # Example 2: Visualize a problem instance
-    # problem = test_pkg.problems[10][2]
-    # n = problem['n']
-    # elistG = problem['elistG']
-    # m = problem['m']
-    # elistH = problem['elistH']
-    # correct_bitstrings = problem['correct_bitstrings']
-    # cubic_instance, n, m, H, posH = produce_cubic_problem_from_graph(n, elistG, m, elistH)
-    # display_graph(n, elistG, m, elistH, correct_bitstrings[0][::-1])
-    # color_graph(correct_bitstrings[0], n, m, H, posH)
+    problem = test_pkg.problems[8][2]
+    n = problem['n']
+    elistG = problem['elistG']
+    m = problem['m']
+    elistH = problem['elistH']
+    correct_bitstrings = problem['correct_bitstrings']
+    cubic_instance, n, m, H, posH = produce_cubic_problem_from_graph(n, elistG, m, elistH)
+    display_graph(n, elistG, m, elistH, correct_bitstrings[0][::-1])
+    color_graph(correct_bitstrings[0], n, m, H, posH)
     
     # Example 3: Iterate over test package problems
-    for num in test_pkg.qubit_nums[:10]:
-        print("Problem size: ", num)
-        added_list = []
-        for problem in test_pkg.problems[num]:
-            n = problem['n']
-            elistG = problem['elistG']
-            m = problem['m']
-            elistH = problem['elistH']
-            correct_bitstrings = problem['correct_bitstrings']
-            cubic_instance, n, m, H, posH = produce_cubic_problem_from_graph(n, elistG, m, elistH)
-            print(f"QUBIT NUMBER Before: {cubic_instance.num_vars}")
-            cubic_instance.reduce_cubic()
-            print(f"QUBIT NUMBER After: {cubic_instance.num_vars}")
-            added_list.append(cubic_instance.num_vars)
-        print(f"Average number of qubits added for size {num}: {np.average(added_list)}")
+    # for num in test_pkg.qubit_nums[:10]:
+    #     print("Problem size: ", num)
+    #     added_list = []
+    #     for problem in test_pkg.problems[num]:
+    #         n = problem['n']
+    #         elistG = problem['elistG']
+    #         m = problem['m']
+    #         elistH = problem['elistH']
+    #         correct_bitstrings = problem['correct_bitstrings']
+    #         cubic_instance, n, m, H, posH = produce_cubic_problem_from_graph(n, elistG, m, elistH)
+    #         print(f"QUBIT NUMBER Before: {cubic_instance.num_vars}")
+    #         cubic_instance.reduce_cubic()
+    #         print(f"QUBIT NUMBER After: {cubic_instance.num_vars}")
+    #         added_list.append(cubic_instance.num_vars)
+    #     print(f"Average number of qubits added for size {num}: {np.average(added_list)}")
     
     # Example 4: Run an experiment with VQE
     # problem = test_pkg.problems[14][2]
@@ -544,7 +544,7 @@ def main():
     
     # Example 6: Estimate complexity of QAOA
     # print(complexity_estimation(2, [(0, 1)], 3, [(0, 1), (1, 2), (2, 0)], ['010001', '100010', '001100'], iterations=40, quadratic=True, low=0, high=7))
-    # print(complexity_estimation(3, [(0, 1), (1, 2), (0, 2)], 4, [(0, 1), (1, 2), (0, 2), (3, 1), (3, 2)], ['010000100001', '010000101000'], iterations=20, low=0, high=9))
+    # print(complexity_estimation(3, [(0, 1), (1, 2), (0, 2)], 4, [(0, 1), (1, 2), (0, 2), (3, 1), (3, 2)], ['010000100001', '010000101000'], iterations=40, quadratic=True, low=0, high=7))
     
 if __name__ == "__main__":
     # Call the main function if the script is executed directly
